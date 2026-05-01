@@ -1,0 +1,64 @@
+[project]
+name = "customer-support-agent"
+version = "0.1.0"
+description = "Solo Founder OS agent #9 — triage user messages (signup-broken / forge-stuck / billing / love / spam / novel) → auto-draft replies → HITL queue."
+authors = [{ name = "Alex Ji", email = "alex@vibexforge.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "anthropic>=0.40",
+    "solo-founder-os>=0.10.0",
+]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+]
+keywords = ["support", "triage", "claude", "indie", "solo-founder", "hitl"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=8.0", "mcp>=1.0"]
+
+[project.scripts]
+customer-support-agent = "customer_support_agent.__main__:main"
+customer-support-mcp = "customer_support_agent.mcp_server:main"
+
+[project.urls]
+Repository = "https://github.com/alex-jb/customer-support-agent"
+Issues = "https://github.com/alex-jb/customer-support-agent/issues"
+Homepage = "https://github.com/alex-jb/customer-support-agent"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["customer_support_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = [
+    "E501",
+    "E731",
+    "E402",
+    "E702",
+    "E741",
+]
