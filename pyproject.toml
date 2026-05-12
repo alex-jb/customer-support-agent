@@ -5,7 +5,7 @@ description = "Solo Founder OS agent #9 — triage user messages (signup-broken 
 authors = [{ name = "Alex Ji", email = "alex@vibexforge.com" }]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "anthropic>=0.40",
     "solo-founder-os>=0.10.0",
@@ -17,7 +17,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
