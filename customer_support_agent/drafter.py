@@ -28,6 +28,17 @@ USAGE_LOG_PATH = (pathlib.Path.home()
                   / ".customer-support-agent" / "usage.jsonl")
 
 
+# 2026-06-08: Aidan Gomez Cohere citation pattern adapted for support context.
+# Drafts that acknowledge user issues must quote ONE verbatim phrase from
+# the original message (max 10 words) in [src:user_msg] format. Stops
+# Claude from inventing details ("you mentioned the dashboard was slow"
+# when user said no such thing). Applied as suffix to all PROMPTS.
+_CITATION_SUFFIX = (
+    "\n  - When acknowledging their specific issue, quote ONE ≤10-word verbatim "
+    "phrase from their original message, formatted as: \"...their phrase...\" "
+    "[src:user_msg]. Prevents inventing details they never mentioned."
+)
+
 # Per-label drafter system prompts.
 PROMPTS = {
     "signup_broken": (
@@ -111,7 +122,11 @@ def draft_reply(
             raw_response="(no API key)",
         )
 
+    # 2026-06-08: append citation suffix to enforce verbatim user quoting
+    # for all labels except 'love' (thank-you replies don't need citations).
     system = PROMPTS[label]
+    if label not in ("love", "novel"):
+        system = system + _CITATION_SUFFIX
     user = (
         f"From: {message.sender}\n"
         f"Subject: {message.subject}\n"
